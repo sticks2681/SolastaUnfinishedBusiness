@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Install|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release Install|AnyCPU'">
-    <OutputPath>$(SolastaInstallDir)/Mods/SolastaUnfinishedBusiness/</OutputPath>
+    <OutputPath>$(SolastaInstallDir)/Mods/00_MD_SolastaUnfinishedBusiness/</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
   </PropertyGroup>
