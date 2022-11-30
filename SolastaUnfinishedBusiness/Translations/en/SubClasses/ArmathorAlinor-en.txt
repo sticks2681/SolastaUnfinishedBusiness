@@ -1,0 +1,4 @@
+﻿Subclass/&ArmathorAlinorTitle=Alinor
+Stage/&SubclassSelectionStageArmathorOathHeader=
+Stage/&SubclassSeletionStageArmathorTitle=
+Stage/&SubclassSelectionStageArmathorOathFeatures=

@@ -1,0 +1,10 @@
+﻿Class/&ArmathorTitle=Armathor
+Feature/&BonusCantripsArmathorDescription=You've learned an extra cantrip along the way: {0}
+Feature/&BonusCantripsArmathorTitle=Bonus Cantrips
+Feature/&CastSpellsArmathorDescription=Can cast spells from Cleric, Paladin, Ranger, and Wizard spell lists.
+Feature/&CastSpellsArmathorTitle=Armathor Spellcasting
+Feature/&PointPoolArmathorSkillsTitle=Armathor Skill Proficiencies
+Feature/&ProficiencyArmathorArmorTitle=Armathor Armor Proficiencies
+Feature/&ProficiencyArmathorToolsTitle=Armathor Tool Proficiencies
+Feature/&ProficiencyArmathorWeaponTitle=Armathor Weapon Proficiency
+Subclass/&ArmathorOathTitle=Armathor Subclass

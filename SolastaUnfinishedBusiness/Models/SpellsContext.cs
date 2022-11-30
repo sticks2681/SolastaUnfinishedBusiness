@@ -7,6 +7,7 @@ using SolastaUnfinishedBusiness.Builders;
 using SolastaUnfinishedBusiness.Classes.Inventor;
 using static SolastaUnfinishedBusiness.Spells.SpellBuilders;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.SpellListDefinitions;
+using SolastaUnfinishedBusiness.Classes.Armathor;
 
 namespace SolastaUnfinishedBusiness.Models;
 
@@ -127,55 +128,56 @@ internal static class SpellsContext
         }
 
         var spellListInventorClass = InventorClass.SpellList;
+        var spellListArmathorClass = ArmathorClass.SpellList;
 
         // cantrips
         RegisterSpell(BuildAcidClaw(), 0, SpellListDruid);
         RegisterSpell(BuildAirBlast(), 0, SpellListBard, SpellListCleric, SpellListDruid, SpellListSorcerer,
-            SpellListWizard);
-        RegisterSpell(BuildBurstOfRadiance(), 0, SpellListCleric);
-        RegisterSpell(BuildIlluminatingSphere(), 0, SpellListBard, SpellListSorcerer, SpellListWizard);
-        RegisterSpell(BuildMinorLifesteal(), 0, SpellListBard, SpellListSorcerer, SpellListWizard, SpellListWarlock);
+            SpellListWizard, spellListArmathorClass);
+        RegisterSpell(BuildBurstOfRadiance(), 0, SpellListCleric, spellListArmathorClass);
+        RegisterSpell(BuildIlluminatingSphere(), 0, SpellListBard, SpellListSorcerer, SpellListWizard, spellListArmathorClass);
+        RegisterSpell(BuildMinorLifesteal(), 0, SpellListBard, SpellListSorcerer, SpellListWizard, SpellListWarlock, spellListArmathorClass);
         RegisterSpell(BuildResonatingStrike(), 0, SpellListBard, SpellListSorcerer, SpellListWarlock, SpellListWizard,
-            spellListInventorClass);
+            spellListInventorClass, spellListArmathorClass);
         RegisterSpell(BuildSunlightBlade(), 0, SpellListBard, SpellListSorcerer, SpellListWarlock, SpellListWizard,
-            spellListInventorClass);
+            spellListInventorClass, spellListArmathorClass);
         RegisterSpell(BuildThornyVines(), 0, SpellListDruid, spellListInventorClass);
         RegisterSpell(BuildThunderStrike(), 0, SpellListDruid, SpellListSorcerer, SpellListWizard,
-            spellListInventorClass);
+            spellListInventorClass, spellListArmathorClass);
 
         // 1st level
         // RegisterSpell(BuildFindFamiliar(), 0, SpellListWizard);
-        RegisterSpell(BuildMule(), 0, SpellListWizard);
-        RegisterSpell(BuildRadiantMotes(), 0, SpellListWizard, spellListInventorClass);
+        RegisterSpell(BuildMule(), 0, SpellListWizard, spellListArmathorClass);
+        RegisterSpell(BuildRadiantMotes(), 0, SpellListWizard, spellListInventorClass, spellListArmathorClass);
 
         // 2nd level
         RegisterSpell(BuildPetalStorm(), 0, SpellListDruid);
-        RegisterSpell(BuildProtectThreshold(), 0, SpellListCleric, SpellListDruid, SpellListPaladin);
-        RegisterSpell(BuildMirrorImage(), 0, SpellListBard, SpellListSorcerer, SpellListWarlock, SpellListWizard);
+        RegisterSpell(BuildProtectThreshold(), 0, SpellListCleric, SpellListDruid, SpellListPaladin, spellListArmathorClass);
+        RegisterSpell(BuildMirrorImage(), 0, SpellListBard, SpellListSorcerer, SpellListWarlock, SpellListWizard, spellListArmathorClass);
 
         // 3rd level
-        RegisterSpell(BuildEarthTremor(), 0, SpellListDruid, SpellListSorcerer, SpellListWizard);
-        RegisterSpell(BuildWinterBreath(), 0, SpellListDruid, SpellListSorcerer, SpellListWizard);
-        RegisterSpell(BuildSpiritShroud(), 0, SpellListCleric, SpellListPaladin, SpellListWarlock, SpellListWizard);
+        RegisterSpell(BuildEarthTremor(), 0, SpellListDruid, SpellListSorcerer, SpellListWizard, spellListArmathorClass);
+        RegisterSpell(BuildWinterBreath(), 0, SpellListDruid, SpellListSorcerer, SpellListWizard, spellListArmathorClass);
+        RegisterSpell(BuildSpiritShroud(), 0, SpellListCleric, SpellListPaladin, SpellListWarlock, SpellListWizard, spellListArmathorClass);
 
         //5th level
-        RegisterSpell(FarStep, 0, SpellListSorcerer, SpellListWarlock, SpellListWizard);
+        RegisterSpell(FarStep, 0, SpellListSorcerer, SpellListWarlock, SpellListWizard, spellListArmathorClass);
 
         // 7th level
-        RegisterSpell(BuildReverseGravity(), 0, SpellListDruid, SpellListSorcerer, SpellListWizard);
+        RegisterSpell(BuildReverseGravity(), 0, SpellListDruid, SpellListSorcerer, SpellListWizard, spellListArmathorClass);
 
         // 8th level
-        RegisterSpell(BuildMindBlank(), 0, SpellListBard, SpellListWizard);
+        RegisterSpell(BuildMindBlank(), 0, SpellListBard, SpellListWizard, spellListArmathorClass);
 
         // 9th level
-        RegisterSpell(BuildForesight(), 0, SpellListBard, SpellListSorcerer, SpellListWizard);
-        RegisterSpell(BuildMassHeal(), 0, SpellListCleric);
-        RegisterSpell(BuildMeteorSwarmSingleTarget(), 0, SpellListSorcerer, SpellListWizard);
-        RegisterSpell(BuildPowerWordHeal(), 0, SpellListBard, SpellListCleric);
-        RegisterSpell(BuildPowerWordKill(), 0, SpellListBard, SpellListSorcerer, SpellListWarlock, SpellListWizard);
-        RegisterSpell(BuildTimeStop(), 0, SpellListWizard, SpellListSorcerer);
-        RegisterSpell(BuildShapechange(), 0, SpellListDruid, SpellListWizard);
-        RegisterSpell(BuildWeird(), 0, SpellListWizard);
+        RegisterSpell(BuildForesight(), 0, SpellListBard, SpellListSorcerer, SpellListWizard, spellListArmathorClass);
+        RegisterSpell(BuildMassHeal(), 0, SpellListCleric, spellListArmathorClass);
+        RegisterSpell(BuildMeteorSwarmSingleTarget(), 0, SpellListSorcerer, SpellListWizard, spellListArmathorClass);
+        RegisterSpell(BuildPowerWordHeal(), 0, SpellListBard, SpellListCleric, spellListArmathorClass);
+        RegisterSpell(BuildPowerWordKill(), 0, SpellListBard, SpellListSorcerer, SpellListWarlock, SpellListWizard, spellListArmathorClass);
+        RegisterSpell(BuildTimeStop(), 0, SpellListWizard, SpellListSorcerer, spellListArmathorClass);
+        RegisterSpell(BuildShapechange(), 0, SpellListDruid, SpellListWizard, spellListArmathorClass);
+        RegisterSpell(BuildWeird(), 0, SpellListWizard, spellListArmathorClass);
 
         Spells = Spells.OrderBy(x => x.SpellLevel).ThenBy(x => x.FormatTitle()).ToHashSet();
 

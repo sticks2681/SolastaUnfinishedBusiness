@@ -6,6 +6,7 @@ using System.Reflection.Emit;
 using HarmonyLib;
 using JetBrains.Annotations;
 using SolastaUnfinishedBusiness.Api.Helpers;
+using SolastaUnfinishedBusiness.Classes.Armathor;
 using SolastaUnfinishedBusiness.Classes.Inventor;
 using SolastaUnfinishedBusiness.Subclasses;
 using static FeatureDefinitionCastSpell;
@@ -40,7 +41,8 @@ internal static class SharedSpellsContext
         { Wizard.Name, CasterProgression.Full },
         { Paladin.Name, CasterProgression.Half },
         { Ranger.Name, CasterProgression.Half },
-        { InventorClass.ClassName, CasterProgression.HalfRoundUp }
+        { InventorClass.ClassName, CasterProgression.HalfRoundUp },
+        { ArmathorClass.ClassName, CasterProgression.Full }
     };
 
     private static Dictionary<string, CasterProgression> SubclassCasterType { get; } = new()
