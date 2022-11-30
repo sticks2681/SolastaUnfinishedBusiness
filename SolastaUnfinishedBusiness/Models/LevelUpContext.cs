@@ -80,9 +80,6 @@ internal static class LevelUpContext
             return;
         }
 
-        DatabaseHelper.TryGetDefinition<CharacterClassDefinition>("Inventor", out var inventorClass);
-        DatabaseHelper.TryGetDefinition<CharacterClassDefinition>("Armathor", out var armathorClass);
-
         levelUpData.SelectedClass = characterClassDefinition;
 
         var classesAndLevels = rulesetCharacterHero.ClassesAndLevels;
@@ -95,6 +92,9 @@ internal static class LevelUpContext
             || (levelUpData.SelectedClass == Paladin && rulesetCharacterHero.DeityDefinition == null);
 
         levelUpData.GrantedItems = new HashSet<ItemDefinition>();
+
+        DatabaseHelper.TryGetDefinition<CharacterClassDefinition>("Inventor", out var inventorClass);
+        DatabaseHelper.TryGetDefinition<CharacterClassDefinition>("Armathor", out var armathorClass);
 
         // Holy Symbol
         var required = (

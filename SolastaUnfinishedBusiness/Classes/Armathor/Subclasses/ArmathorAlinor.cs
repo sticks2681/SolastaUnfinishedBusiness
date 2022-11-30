@@ -15,6 +15,7 @@ using static RuleDefinitions.EffectIncrementMethod;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAutoPreparedSpellss;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionHealingModifiers;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionMagicAffinitys;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionPowers;
 
 namespace SolastaUnfinishedBusiness.Classes.Armathor.Subclasses;
@@ -27,11 +28,10 @@ public static class ArmathorAlinor
         return CharacterSubclassDefinitionBuilder
             .Create("ArmathorAlinor")
             .SetGuiPresentation(Category.Subclass, CharacterSubclassDefinitions.OathOfDevotion)
-            .AddFeaturesAtLevel(1,
-                PowerOathOfDevotionTurnUnholy)
             .AddFeaturesAtLevel(3,
                 AutoPreparedSpellsOathOfDevotion,
-                PowerOathOfDevotionSacredWeapon)
+                PowerOathOfDevotionSacredWeapon,
+                PowerOathOfDevotionTurnUnholy)
             .AddFeaturesAtLevel(6,
                 HealingModifierDomainLifeBlessedHealer,
                 PowerDomainBattleHeraldOfBattle)

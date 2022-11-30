@@ -20,7 +20,6 @@ using static SolastaUnfinishedBusiness.Api.DatabaseHelper;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.CharacterClassDefinitions;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAutoPreparedSpellss;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionHealingModifiers;
-using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionMagicAffinitys;
 
 namespace SolastaUnfinishedBusiness.Classes.Armathor;
 
@@ -206,14 +205,14 @@ internal static class ArmathorClass
                 .AddToDB())
 
             // Skill points
-            // .AddFeaturesAtLevel(1, FeatureDefinitionPointPoolBuilder
-            .AddFeaturesAtLevel(1, FeatureDefinitionProficiencyBuilder
+            .AddFeaturesAtLevel(1, FeatureDefinitionPointPoolBuilder
+            // .AddFeaturesAtLevel(1, FeatureDefinitionProficiencyBuilder
                 .Create("PointPoolArmathorSkills")
                 .SetGuiPresentation(Category.Feature, "Feature/&SkillGainChoicesPluralDescription")
-                .SetProficiencies(ProficiencyType.Skill,
-                    /*.SetPool(HeroDefinitions.PointsPoolType.Skill, 13)
-                    .OnlyUniqueChoices()
-                    .RestrictChoices(*/
+                // .SetProficiencies(ProficiencyType.Skill,
+                .SetPool(HeroDefinitions.PointsPoolType.Skill, 13)
+                .OnlyUniqueChoices()
+                .RestrictChoices(
                     SkillDefinitions.Acrobatics,
                     SkillDefinitions.AnimalHandling,
                     SkillDefinitions.Arcana,
@@ -231,7 +230,8 @@ internal static class ArmathorClass
                     SkillDefinitions.Religion,
                     SkillDefinitions.SleightOfHand,
                     SkillDefinitions.Stealth,
-                    SkillDefinitions.Survival)
+                    SkillDefinitions.Survival
+                )
                 .AddToDB())
 
         #endregion
@@ -241,12 +241,7 @@ internal static class ArmathorClass
             .AddFeaturesAtLevel(1,
                 SpellCasting,
                 BuildBonusCantrips(),
-                BuildRitualCasting(),
-                AutoPreparedSpellsDomainBattle,
-                AutoPreparedSpellsDomainLife,
-                AutoPreparedSpellsDomainSun,
-                HealingModifierDomainLifeDiscipleOfLife,
-                MagicAffinityDomainSunHolyRadiance)
+                BuildRitualCasting())
 
         #endregion
 
@@ -350,7 +345,7 @@ internal static class ArmathorClass
 
         #region Subclasses
 
-        builder.AddFeaturesAtLevel(1, FeatureDefinitionSubclassChoiceBuilder
+        builder.AddFeaturesAtLevel(3, FeatureDefinitionSubclassChoiceBuilder
             .Create("SubclassChoiceArmathor")
             .SetGuiPresentation("ArmathorOath", Category.Subclass)
             .SetSubclassSuffix("ArmathorOath")
@@ -364,15 +359,6 @@ internal static class ArmathorClass
 
         return Class;
     }
-
-    /*private static FeatureDefinition ArmathorWizardSpellList()
-    {
-        return FeatureDefinitionMagicAffinityBuilder
-            .Create("ArmathorWizardSpellList")
-            .SetGuiPresentation(Category.Feature)
-            .SetExtendedSpellList(SpellListDefinitions.SpellListWizard)
-            .AddToDB();
-    }*/
 
     private static SpellListDefinition BuildSpellList()
     {

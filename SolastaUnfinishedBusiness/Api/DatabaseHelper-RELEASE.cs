@@ -29,7 +29,6 @@ internal static partial class DatabaseHelper
     }
     internal static class CharacterClassDefinitions
     {
-        // internal static CharacterClassDefinition Armathor { get; } = GetDefinition<CharacterClassDefinition>("Armathor");
         internal static CharacterClassDefinition Barbarian { get; } = GetDefinition<CharacterClassDefinition>("Barbarian");
         internal static CharacterClassDefinition Bard { get; } = GetDefinition<CharacterClassDefinition>("Bard");
         internal static CharacterClassDefinition Cleric { get; } = GetDefinition<CharacterClassDefinition>("Cleric");
