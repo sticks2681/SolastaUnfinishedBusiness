@@ -14,13 +14,18 @@ internal class EffectDescriptionBuilder
         effect = new EffectDescription
         {
             effectAdvancement = new EffectAdvancement { incrementMultiplier = 1 },
-            effectParticleParameters = MagicWeapon.EffectDescription.EffectParticleParameters
+            effectParticleParameters = new EffectParticleParameters()
         };
+        effect.effectParticleParameters.Copy(MagicWeapon.EffectDescription.EffectParticleParameters);
     }
 
     private EffectDescriptionBuilder(EffectDescription effect)
     {
-        this.effect = new EffectDescription();
+        this.effect = new EffectDescription
+        {
+            effectAdvancement = new EffectAdvancement { incrementMultiplier = 1 },
+            effectParticleParameters = MagicWeapon.EffectDescription.EffectParticleParameters
+        };
         this.effect.Copy(effect);
     }
 
@@ -75,7 +80,7 @@ internal class EffectDescriptionBuilder
 
     internal EffectDescriptionBuilder SetParticleEffectParameters(EffectParticleParameters parameters)
     {
-        effect.effectParticleParameters = parameters;
+        effect.effectParticleParameters.Copy(parameters);
         return this;
     }
 
