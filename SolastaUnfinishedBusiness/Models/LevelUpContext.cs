@@ -80,6 +80,9 @@ internal static class LevelUpContext
             return;
         }
 
+        DatabaseHelper.TryGetDefinition<CharacterClassDefinition>("Inventor", out var inventorClass);
+        DatabaseHelper.TryGetDefinition<CharacterClassDefinition>("Armathor", out var armathorClass);
+
         levelUpData.SelectedClass = characterClassDefinition;
 
         var classesAndLevels = rulesetCharacterHero.ClassesAndLevels;
@@ -89,21 +92,21 @@ internal static class LevelUpContext
 
         levelUpData.RequiresDeity =
             (levelUpData.SelectedClass == Cleric && !classesAndLevels.ContainsKey(Cleric))
-            || (levelUpData.SelectedClass == Paladin && rulesetCharacterHero.DeityDefinition == null);
+            || (levelUpData.SelectedClass == Paladin && rulesetCharacterHero.DeityDefinition == null)
+            || (levelUpData.SelectedClass == armathorClass && rulesetCharacterHero.DeityDefinition == null);
 
         levelUpData.GrantedItems = new HashSet<ItemDefinition>();
-
-        DatabaseHelper.TryGetDefinition<CharacterClassDefinition>("Inventor", out var inventorClass);
-        DatabaseHelper.TryGetDefinition<CharacterClassDefinition>("Armathor", out var armathorClass);
 
         // Holy Symbol
         var required = (
                            levelUpData.SelectedClass == Cleric ||
-                           levelUpData.SelectedClass == Paladin
+                           levelUpData.SelectedClass == Paladin ||
+                           levelUpData.SelectedClass == armathorClass
                        ) &&
                        !(
                            classesAndLevels.ContainsKey(Cleric) ||
-                           classesAndLevels.ContainsKey(Paladin)
+                           classesAndLevels.ContainsKey(Paladin) ||
+                           classesAndLevels.ContainsKey(armathorClass)
                        );
 
         if (required)

@@ -1,4 +1,12 @@
-﻿Subclass/&ArmathorAlinorTitle=Alinor
-Stage/&SubclassSelectionStageArmathorOathHeader=
-Stage/&SubclassSeletionStageArmathorTitle=
-Stage/&SubclassSelectionStageArmathorOathFeatures=
+﻿Feature/&AttributeModifierArmathorBladesongDescription=You gain a bonus to your AC equal to your Intelligence modifier.
+Feature/&AttributeModifierArmathorBladesongTitle=Blade Dance
+Feature/&AttributeModifierArmathorEverVigilantDescription=You gain a bonus to your intiative rolls equal to your Intelligence modifier.
+Feature/&AttributeModifierArmathorEverVigilantTitle=Ever Vigilant
+Feature/&MagicAffinityArmathorExtraPreparedDescription=You can prepare a number of additional spells equal to your Intelligence modifier.
+Feature/&MagicAffinityArmathorExtraPreparedTitle=Extra Prepared
+Subclass/&ArmathorAlinorTitle=Alinor
+Subclass/&ArmathorAlinorDescription=
+Subclass/&ArmathorOathDescription=Alinor
+Stage/&SubclassSelectionStageArmathorOathHeader=Armathor Oath
+Stage/&SubclassSelectionStageArmathorTitle=Armathor Oath
+Stage/&SubclassSelectionStageArmathorOathFeatures=Oath Features

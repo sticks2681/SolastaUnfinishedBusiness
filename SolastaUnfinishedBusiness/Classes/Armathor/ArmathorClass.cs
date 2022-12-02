@@ -7,7 +7,6 @@ using SolastaUnfinishedBusiness.Api.Helpers;
 using SolastaUnfinishedBusiness.Builders;
 using SolastaUnfinishedBusiness.Builders.Features;
 using SolastaUnfinishedBusiness.Classes.Armathor.Subclasses;
-using SolastaUnfinishedBusiness.Classes.Inventor.Subclasses;
 using SolastaUnfinishedBusiness.CustomBehaviors;
 using SolastaUnfinishedBusiness.CustomDefinitions;
 using SolastaUnfinishedBusiness.CustomInterfaces;
@@ -18,8 +17,15 @@ using UnityEngine.AddressableAssets;
 using static RuleDefinitions;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.CharacterClassDefinitions;
-using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAutoPreparedSpellss;
-using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionHealingModifiers;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionActionAffinitys;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAdditionalDamages;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAttributeModifiers;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionDieRollModifiers;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionFeatureSets;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionFightingStyleChoices;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionPowers;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionProficiencys;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionSavingThrowAffinitys;
 
 namespace SolastaUnfinishedBusiness.Classes.Armathor;
 
@@ -170,7 +176,9 @@ internal static class ArmathorClass
             .AddFeaturesAtLevel(1, FeatureDefinitionProficiencyBuilder
                 .Create("ProficiencyArmathorWeapon")
                 .SetGuiPresentation(Category.Feature, "Feature/&WeaponTrainingShortDescription")
-                .SetProficiencies(ProficiencyType.Weapon, EquipmentDefinitions.SimpleWeaponCategory, EquipmentDefinitions.MartialWeaponCategory)
+                .SetProficiencies(ProficiencyType.Weapon,
+                    EquipmentDefinitions.SimpleWeaponCategory,
+                    EquipmentDefinitions.MartialWeaponCategory)
                 .AddToDB())
 
             // Armor
@@ -206,7 +214,7 @@ internal static class ArmathorClass
 
             // Skill points
             .AddFeaturesAtLevel(1, FeatureDefinitionPointPoolBuilder
-            // .AddFeaturesAtLevel(1, FeatureDefinitionProficiencyBuilder
+                // .AddFeaturesAtLevel(1, FeatureDefinitionProficiencyBuilder
                 .Create("PointPoolArmathorSkills")
                 .SetGuiPresentation(Category.Feature, "Feature/&SkillGainChoicesPluralDescription")
                 // .SetProficiencies(ProficiencyType.Skill,
@@ -230,8 +238,16 @@ internal static class ArmathorClass
                     SkillDefinitions.Religion,
                     SkillDefinitions.SleightOfHand,
                     SkillDefinitions.Stealth,
-                    SkillDefinitions.Survival
-                )
+                    SkillDefinitions.Survival)
+                .AddToDB())
+
+            // Tools Proficiency
+            .AddFeaturesAtLevel(1, FeatureDefinitionProficiencyBuilder
+                .Create("ProficiencyArmathorFighting")
+                .SetGuiPresentation(Category.Feature, "Feature/&ArmathorFightingStylesDescription")
+                .SetProficiencies(ProficiencyType.FightingStyle,
+                    FightingStyleDefinitions.BlindFighting.Name,
+                    FightingStyleDefinitions.TwoWeapon.Name)
                 .AddToDB())
 
         #endregion
@@ -241,11 +257,31 @@ internal static class ArmathorClass
             .AddFeaturesAtLevel(1,
                 SpellCasting,
                 BuildBonusCantrips(),
-                BuildRitualCasting())
+                BuildRitualCasting(),
+                AttributeModifierPaladinHealingPoolBase,
+                AttributeModifierPaladinHealingPoolMultiplier,
+                FeatureSetMonkPurityOfBody,
+                FeatureSetMonkStillnessOfMind,
+                FeatureSetMonkTimelessBody,
+                //FightingStyleFighter,
+                PowerFighterSecondWind,
+                PowerPaladinCureDisease,
+                PowerPaladinDivineSense,
+                PowerPaladinLayOnHands,
+                PowerPaladinNeutralizePoison
+            )
 
         #endregion
 
         #region Level 02
+
+            .AddFeaturesAtLevel(2,
+                ActionAffinityRogueCunningAction,
+                AdditionalDamagePaladinDivineSmite,
+                AttributeModifierClericChannelDivinity,
+                PowerFighterActionSurge,
+                PowerWizardArcaneRecovery
+            )
 
         #endregion
 
@@ -263,13 +299,26 @@ internal static class ArmathorClass
 
         #region Level 05
 
+            .AddFeaturesAtLevel(5,
+                AttributeModifierFighterExtraAttack
+            )
+
         #endregion
 
         #region Level 06
 
+            .AddFeaturesAtLevel(6,
+                AttributeModifierClericChannelDivinityAdd,
+                PowerPaladinAuraOfProtection
+            )
+
         #endregion
 
         #region Level 07
+
+            .AddFeaturesAtLevel(7,
+                SavingThrowAffinityMonkEvasion
+            )
 
         #endregion
 
@@ -283,13 +332,28 @@ internal static class ArmathorClass
 
         #region Level 09
 
+            .AddFeaturesAtLevel(9,
+                AttributeModifierFighterIndomitable,
+                ProficiencyMonkDiamondSoulSavingThrow
+            )
+
         #endregion
 
         #region Level 10
 
+            .AddFeaturesAtLevel(10,
+                PowerPaladinAuraOfCourage
+            )
+
         #endregion
 
         #region Level 11
+
+            .AddFeaturesAtLevel(11,
+                AdditionalDamagePaladinImprovedDivineSmite,
+                AttributeModifierFighterExtraAttack,
+                DieRollModifierRogueReliableTalent
+            )
 
         #endregion
 
@@ -345,7 +409,7 @@ internal static class ArmathorClass
 
         #region Subclasses
 
-        builder.AddFeaturesAtLevel(3, FeatureDefinitionSubclassChoiceBuilder
+        builder.AddFeaturesAtLevel(1, FeatureDefinitionSubclassChoiceBuilder
             .Create("SubclassChoiceArmathor")
             .SetGuiPresentation("ArmathorOath", Category.Subclass)
             .SetSubclassSuffix("ArmathorOath")
