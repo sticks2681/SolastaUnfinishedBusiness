@@ -10,6 +10,8 @@ using static SolastaUnfinishedBusiness.Api.DatabaseHelper.CharacterSubclassDefin
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.ConditionDefinitions;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionPowers;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.SpellDefinitions;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionFightingStyleChoices;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAttributeModifiers;
 
 
 namespace SolastaUnfinishedBusiness.Subclasses;
@@ -295,12 +297,19 @@ internal sealed class PathOfTheLight : AbstractSubclass
             .SetGuiPresentation(Category.Subclass, DomainSun)
             .AddFeaturesAtLevel(3,
                 featureSetPathOfTheLightIlluminatingStrike,
-                featureSetPathOfTheLightPierceTheDarkness)
+                featureSetPathOfTheLightPierceTheDarkness,
+                FightingStyleFighter,
+                PowerFighterSecondWind,
+                PowerFighterActionSurge)
             .AddFeaturesAtLevel(6,
                 featureSetPathOfTheLightLightsProtection)
+            .AddFeaturesAtLevel(9,
+                AttributeModifierFighterIndomitable)
             .AddFeaturesAtLevel(10,
                 powerPathOfTheLightEyesOfTruth,
                 pathOfTheLightIlluminatingStrikeImprovement)
+            .AddFeaturesAtLevel(11,
+                AttributeModifierFighterExtraAttack)
             .AddFeaturesAtLevel(14,
                 featureSetPathOfTheLightIlluminatingBurst)
             .AddToDB();

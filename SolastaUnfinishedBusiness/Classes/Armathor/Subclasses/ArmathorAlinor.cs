@@ -13,16 +13,14 @@ using UnityEngine.AddressableAssets;
 using static RuleDefinitions;
 using static RuleDefinitions.EffectIncrementMethod;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper;
-using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAttributeModifiers;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.ConditionDefinitions;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAttackModifiers;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAutoPreparedSpellss;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionHealingModifiers;
-using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionFeatureSets;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionMagicAffinitys;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionMovementAffinitys;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionPowers;
-using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionSavingThrowAffinitys;
-using static SolastaUnfinishedBusiness.Api.DatabaseHelper.CharacterSubclassDefinitions;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.SpellDefinitions;
 using static SolastaUnfinishedBusiness.Subclasses.CommonBuilders;
 
 namespace SolastaUnfinishedBusiness.Classes.Armathor.Subclasses;
@@ -34,6 +32,8 @@ public static class ArmathorAlinor
         ArmathorBladesong = BuildArmathorBladesong();
         ArmathorEverVigilant = BuildArmathorEverVigilant();
         ArmathorExtraPrepared = BuildArmathorExtraPrepared();
+        ArmathorEyesOfTruth = BuildArmathorEyesOfTruth();
+        ArmathorPierceTheDarkness = BuildArmathorPierceTheDarkness();
 
         return CharacterSubclassDefinitionBuilder
             .Create("ArmathorAlinor")
@@ -42,6 +42,8 @@ public static class ArmathorAlinor
                 ArmathorBladesong,
                 ArmathorEverVigilant,
                 ArmathorExtraPrepared,
+                ArmathorEyesOfTruth,
+                ArmathorPierceTheDarkness,
                 AttackModifierMartialSpellBladeMagicWeapon,
                 //AttributeModifierSwiftBladeBladeDance,
                 AutoPreparedSpellsDomainBattle,
@@ -83,6 +85,8 @@ public static class ArmathorAlinor
     private static FeatureDefinition ArmathorBladesong { get; set; }
     private static FeatureDefinition ArmathorEverVigilant { get; set; }
     private static FeatureDefinition ArmathorExtraPrepared { get; set; }
+    private static FeatureDefinition ArmathorEyesOfTruth { get; set; }
+    private static FeatureDefinition ArmathorPierceTheDarkness { get; set; }
 
     private static FeatureDefinition BuildArmathorBladesong()
     {
@@ -109,6 +113,42 @@ public static class ArmathorAlinor
             .SetGuiPresentation(Category.Feature)
             .SetSpellLearnAndPrepModifiers(1f, 1f, 0, AdvantageType.None,
                 PreparedSpellsModifier.SpellcastingAbilityBonus)
+            .AddToDB();
+    }
+
+    private static FeatureDefinition BuildArmathorPierceTheDarkness()
+    {
+        return FeatureDefinitionFeatureSetBuilder
+            .Create("FeatureSetArmathorPierceTheDarkness")
+            .SetGuiPresentation(Category.Feature)
+            .AddFeatureSet(FeatureDefinitionSenses.SenseSuperiorDarkvision)
+            .AddToDB();
+    }
+
+    private static FeatureDefinition BuildArmathorEyesOfTruth()
+    {
+        return FeatureDefinitionPowerBuilder
+            .Create("PowerArmathorEyesOfTruth")
+            .SetGuiPresentation(Category.Feature, SeeInvisibility)
+            .SetUsesFixed(ActivationTime.Permanent)
+            .SetEffectDescription(EffectDescriptionBuilder
+                .Create()
+                .SetDurationData(DurationType.Permanent, 0, TurnOccurenceType.StartOfTurn)
+                .SetTargetingData(Side.Ally, RangeType.Self, 0, TargetType.Self)
+                .SetEffectForms(
+                    EffectFormBuilder
+                        .Create()
+                        .SetConditionForm(
+                            ConditionDefinitionBuilder
+                                .Create("ConditionArmathorEyesOfTruth")
+                                .SetGuiPresentation(Category.Condition, ConditionSeeInvisibility)
+                                .SetSilent(Silent.WhenAddedOrRemoved)
+                                .AddFeatures(FeatureDefinitionSenses.SenseSeeInvisible16)
+                                .AddToDB(),
+                            ConditionForm.ConditionOperation.Add)
+                        .Build())
+                .Build())
+            .SetShowCasting(false)
             .AddToDB();
     }
 }

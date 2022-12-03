@@ -8,5 +8,5 @@ Subclass/&ArmathorAlinorTitle=Alinor
 Subclass/&ArmathorAlinorDescription=
 Subclass/&ArmathorOathDescription=Alinor
 Stage/&SubclassSelectionStageArmathorOathHeader=Armathor Oath
-Stage/&SubclassSelectionStageArmathorTitle=Armathor Oath
+Stage/&SubclassSelectionStageArmathorOathTitle=Armathor
 Stage/&SubclassSelectionStageArmathorOathFeatures=Oath Features

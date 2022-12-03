@@ -8,6 +8,11 @@ using static SolastaUnfinishedBusiness.Api.DatabaseHelper;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.CharacterSubclassDefinitions;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.ConditionDefinitions;
 using static SolastaUnfinishedBusiness.Subclasses.CommonBuilders;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionPointPools;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAdditionalDamages;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionActionAffinitys;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionSavingThrowAffinitys;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionDieRollModifiers;
 
 namespace SolastaUnfinishedBusiness.Subclasses;
 
@@ -163,12 +168,22 @@ internal sealed class WizardBladeDancer : AbstractSubclass
             .SetGuiPresentation(Category.Subclass, RangerSwiftBlade)
             .AddFeaturesAtLevel(2,
                 featureSetCasterBladeDancerFighting,
-                featureSetBladeDancerBladeDance)
+                featureSetBladeDancerBladeDance,
+                PointPoolRogueExpertise,
+                AdditionalDamageRogueSneakAttack,
+                ActionAffinityRogueCunningAction)
+            .AddFeaturesAtLevel(5,
+                ActionAffinityUncannyDodge)
             .AddFeaturesAtLevel(6,
                 AttributeModifierCasterFightingExtraAttack,
-                ReplaceAttackWithCantripCasterFighting)
+                ReplaceAttackWithCantripCasterFighting,
+                PointPoolRogueExpertise)
+            .AddFeaturesAtLevel(7,
+                SavingThrowAffinityRogueEvasion)
             .AddFeaturesAtLevel(10,
                 featureSetBladeDancerDanceOfDefense)
+            .AddFeaturesAtLevel(11,
+                DieRollModifierRogueReliableTalent)
             .AddFeaturesAtLevel(14,
                 featureSetBladeDancerDanceOfVictory)
             .AddToDB();

@@ -272,6 +272,7 @@ internal static partial class DatabaseHelper
         internal static FeatureDefinitionActionAffinity ActionAffinityRogueCunningAction { get; } = GetDefinition<FeatureDefinitionActionAffinity>("ActionAffinityRogueCunningAction");
         internal static FeatureDefinitionActionAffinity ActionAffinitySorcererMetamagicToggle { get; } = GetDefinition<FeatureDefinitionActionAffinity>("ActionAffinitySorcererMetamagicToggle");
         internal static FeatureDefinitionActionAffinity ActionAffinityTraditionGreenMageLeafScales { get; } = GetDefinition<FeatureDefinitionActionAffinity>("ActionAffinityTraditionGreenMageLeafScales");
+        internal static FeatureDefinitionActionAffinity ActionAffinityUncannyDodge { get; } = GetDefinition<FeatureDefinitionActionAffinity>("ActionAffinityUncannyDodge");
     }
     internal static class FeatureDefinitionAdditionalActions
     {
@@ -519,6 +520,7 @@ internal static partial class DatabaseHelper
         internal static FeatureDefinitionPointPool PointPoolWarlockMysticArcanum8 { get; } = GetDefinition<FeatureDefinitionPointPool>("PointPoolWarlockMysticArcanum8");
         internal static FeatureDefinitionPointPool PointPoolWarlockSkillPoints { get; } = GetDefinition<FeatureDefinitionPointPool>("PointPoolWarlockSkillPoints");
         internal static FeatureDefinitionPointPool PointPoolWizardSkillPoints { get; } = GetDefinition<FeatureDefinitionPointPool>("PointPoolWizardSkillPoints");
+        internal static FeatureDefinitionPointPool PointPoolRogueExpertise { get; } = GetDefinition<FeatureDefinitionPointPool>("PointPoolRogueExpertise");
     }
     internal static class FeatureDefinitionPowers
     {
@@ -641,6 +643,7 @@ internal static partial class DatabaseHelper
         internal static FeatureDefinitionSavingThrowAffinity SavingThrowAffinityMonkEvasion { get; } = GetDefinition<FeatureDefinitionSavingThrowAffinity>("SavingThrowAffinityMonkEvasion");
         internal static FeatureDefinitionSavingThrowAffinity SavingThrowAffinityPatronHiveWeakeningPheromones { get; } = GetDefinition<FeatureDefinitionSavingThrowAffinity>("SavingThrowAffinityPatronHiveWeakeningPheromones");
         internal static FeatureDefinitionSavingThrowAffinity SavingThrowAffinityShelteringBreeze { get; } = GetDefinition<FeatureDefinitionSavingThrowAffinity>("SavingThrowAffinityShelteringBreeze");
+        internal static FeatureDefinitionSavingThrowAffinity SavingThrowAffinityRogueEvasion { get; } = GetDefinition<FeatureDefinitionSavingThrowAffinity>("SavingThrowAffinityRogueEvasion");
     }
     internal static class FeatureDefinitionSenses
     {

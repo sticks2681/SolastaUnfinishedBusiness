@@ -22,7 +22,6 @@ using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAddit
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAttributeModifiers;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionDieRollModifiers;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionFeatureSets;
-using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionFightingStyleChoices;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionPowers;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionProficiencys;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionSavingThrowAffinitys;
@@ -214,10 +213,8 @@ internal static class ArmathorClass
 
             // Skill points
             .AddFeaturesAtLevel(1, FeatureDefinitionPointPoolBuilder
-                // .AddFeaturesAtLevel(1, FeatureDefinitionProficiencyBuilder
                 .Create("PointPoolArmathorSkills")
                 .SetGuiPresentation(Category.Feature, "Feature/&SkillGainChoicesPluralDescription")
-                // .SetProficiencies(ProficiencyType.Skill,
                 .SetPool(HeroDefinitions.PointsPoolType.Skill, 13)
                 .OnlyUniqueChoices()
                 .RestrictChoices(
@@ -263,7 +260,6 @@ internal static class ArmathorClass
                 FeatureSetMonkPurityOfBody,
                 FeatureSetMonkStillnessOfMind,
                 FeatureSetMonkTimelessBody,
-                //FightingStyleFighter,
                 PowerFighterSecondWind,
                 PowerPaladinCureDisease,
                 PowerPaladinDivineSense,

@@ -3,10 +3,14 @@ using SolastaUnfinishedBusiness.Api.Extensions;
 using SolastaUnfinishedBusiness.Builders;
 using SolastaUnfinishedBusiness.Builders.Features;
 using SolastaUnfinishedBusiness.CustomBehaviors;
+using SolastaUnfinishedBusiness.CustomInterfaces;
 using SolastaUnfinishedBusiness.CustomUI;
+using SolastaUnfinishedBusiness.Models;
 using SolastaUnfinishedBusiness.Properties;
 using static RuleDefinitions;
 using static SolastaUnfinishedBusiness.Api.DatabaseHelper;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionActionAffinitys;
+using static SolastaUnfinishedBusiness.Api.DatabaseHelper.FeatureDefinitionAdditionalDamages;
 
 namespace SolastaUnfinishedBusiness.Subclasses;
 
@@ -22,6 +26,28 @@ internal sealed class WayOfTheDistantHand : AbstractSubclass
 
     internal WayOfTheDistantHand()
     {
+        // proficient with all two handed range weapons
+        // ignore cover and long range disadvantage
+        var featureSetDistantHandSharpShooter = FeatureDefinitionFeatureSetBuilder
+            .Create("FeatureSetDistantHandSharpShooter")
+            .SetGuiPresentation(Category.Feature)
+            .AddFeatureSet(
+                FeatureDefinitionProficiencyBuilder
+                    .Create("ProficiencyDistantHandRangeWeapon")
+                    .SetGuiPresentationNoContent(true)
+                    .SetProficiencies(
+                        ProficiencyType.Weapon,
+                        WeaponTypeDefinitions.HeavyCrossbowType.Name,
+                        WeaponTypeDefinitions.LongbowType.Name)
+                    .AddToDB(),
+                FeatureDefinitionCombatAffinityBuilder
+                    .Create("CombatAffinityDistantHandRangeAttack")
+                    .SetGuiPresentationNoContent(true)
+                    .SetIgnoreCover()
+                    .SetCustomSubFeatures(new BumpWeaponAttackRangeToMax(ValidatorsWeapon.AlwaysValid))
+                    .AddToDB())
+            .AddToDB();
+
         var zenArrow = Sprites.GetSprite("ZenArrow", Resources.ZenArrow, 128, 64);
 
         //
@@ -336,6 +362,10 @@ internal sealed class WayOfTheDistantHand : AbstractSubclass
             .Create("WayOfTheDistantHand")
             .SetOrUpdateGuiPresentation(Category.Subclass, CharacterSubclassDefinitions.RangerMarksman)
             .AddFeaturesAtLevel(3,
+                ActionAffinityRogueCunningAction,
+                AdditionalDamageRogueSneakAttack,
+                featureSetDistantHandSharpShooter,
+                BuildHeartSeekingShot(),
                 proficiencyWayOfTheDistantHandCombat,
                 powerWayOfTheDistantHandZenArrowTechnique)
             .AddFeaturesAtLevel(6,
@@ -344,6 +374,119 @@ internal sealed class WayOfTheDistantHand : AbstractSubclass
             .AddFeaturesAtLevel(11,
                 wayOfDistantHandsZenArcherStunningArrows,
                 powerWayOfTheDistantHandZenArrowUpgradedTechnique)
+            .AddToDB();
+    }
+
+    private static FeatureDefinitionFeatureSet BuildHeartSeekingShot()
+    {
+        var concentrationProvider = new StopPowerConcentrationProvider("HeartSeekingShot",
+            "Tooltip/&HeartSeekingShotConcentration",
+            Sprites.GetSprite("DeadeyeConcentrationIcon",
+                Resources.DeadeyeConcentrationIcon, 64, 64));
+
+        var conditionDistantHandHeartSeekingShotTrigger = ConditionDefinitionBuilder
+            .Create("ConditionDistantHandHeartSeekingShotTrigger")
+            .SetGuiPresentationNoContent(true)
+            .SetSilent(Silent.WhenAddedOrRemoved)
+            .SetFeatures(
+                FeatureDefinitionBuilder
+                    .Create("TriggerFeatureDistantHandHeartSeekingShot")
+                    .SetGuiPresentationNoContent(true)
+                    .SetCustomSubFeatures(concentrationProvider)
+                    .AddToDB())
+            .AddToDB();
+
+        // -4 attack roll but critical threshold is 18 and deal 3d6 additional damage
+        var conditionDistantHandHeartSeekingShot = ConditionDefinitionBuilder
+            .Create("ConditionDistantHandHeartSeekingShot")
+            .SetGuiPresentation("FeatureSetDistantHandHeartSeekingShot", Category.Feature)
+            .AddFeatures(
+                FeatureDefinitionAttributeModifierBuilder
+                    .Create("AttributeModifierDistantHandHeartSeekingShotCriticalThreshold")
+                    .SetGuiPresentation(Category.Feature)
+                    .SetModifier(FeatureDefinitionAttributeModifier.AttributeModifierOperation.Additive,
+                        AttributeDefinitions.CriticalThreshold, -2)
+                    .SetCustomSubFeatures(
+                        new ValidatorsDefinitionApplication(ValidatorsCharacter.HasTwoHandedRangeWeapon))
+                    .AddToDB(),
+                FeatureDefinitionAttackModifierBuilder
+                    .Create("AttackModifierDistantHandHeartSeekingShot")
+                    .SetGuiPresentation(Category.Feature)
+                    .SetAttackRollModifier(-4)
+                    .SetCustomSubFeatures(
+                        new RestrictedContextValidator(OperationType.Set, ValidatorsCharacter.HasTwoHandedRangeWeapon))
+                    .SetRequiredProperty(RestrictedContextRequiredProperty.RangeWeapon)
+                    .AddToDB(),
+                FeatureDefinitionAdditionalDamageBuilder
+                    .Create("AdditionalDamageDistantHandHeartSeekingShot")
+                    .SetGuiPresentationNoContent(true)
+                    .SetNotificationTag("HeartSeekingShot")
+                    .SetFrequencyLimit(FeatureLimitedUsage.None)
+                    .SetTriggerCondition(AdditionalDamageTriggerCondition.CriticalHit)
+                    .SetAdditionalDamageType(AdditionalDamageType.SameAsBaseDamage)
+                    .SetCustomSubFeatures(
+                        new RestrictedContextValidator(OperationType.Set, ValidatorsCharacter.HasTwoHandedRangeWeapon))
+                    .SetRequiredProperty(RestrictedContextRequiredProperty.RangeWeapon)
+                    .SetDamageDice(DieType.D6, 1)
+                    .SetAdvancement(AdditionalDamageAdvancement.ClassLevel, 2, 1, 4, 3)
+                    .AddToDB()
+            )
+            .AddToDB();
+
+        var deadEyeSprite = Sprites.GetSprite("DeadeyeIcon", Resources.DeadeyeIcon, 128, 64);
+
+        var powerDistantHandHeartSeekingShot = FeatureDefinitionPowerBuilder
+            .Create("PowerDistantHandHeartSeekingShot")
+            .SetGuiPresentation("FeatureSetDistantHandHeartSeekingShot", Category.Feature, deadEyeSprite)
+            .SetUsesFixed(ActivationTime.NoCost)
+            .SetEffectDescription(EffectDescriptionBuilder
+                .Create()
+                .SetTargetingData(Side.Ally, RangeType.Self, 0, TargetType.Self)
+                .SetDurationData(DurationType.Permanent)
+                .SetEffectForms(
+                    EffectFormBuilder
+                        .Create()
+                        .SetConditionForm(conditionDistantHandHeartSeekingShotTrigger, ConditionForm.ConditionOperation.Add)
+                        .Build(),
+                    EffectFormBuilder
+                        .Create()
+                        .SetConditionForm(conditionDistantHandHeartSeekingShot, ConditionForm.ConditionOperation.Add)
+                        .Build())
+                .Build())
+            .SetCustomSubFeatures(new ValidatorsPowerUse(ValidatorsCharacter.HasTwoHandedRangeWeapon))
+            .AddToDB();
+
+        Global.PowersThatIgnoreInterruptions.Add(powerDistantHandHeartSeekingShot);
+
+        var powerDistantHandTurnOffHeartSeekingShot = FeatureDefinitionPowerBuilder
+            .Create("PowerDistantHandTurnOffHeartSeekingShot")
+            .SetGuiPresentationNoContent(true)
+            .SetUsesFixed(ActivationTime.NoCost)
+            .SetEffectDescription(EffectDescriptionBuilder
+                .Create()
+                .SetTargetingData(Side.Ally, RangeType.Self, 0, TargetType.Self)
+                .SetDurationData(DurationType.Round, 1)
+                .SetEffectForms(
+                    EffectFormBuilder
+                        .Create()
+                        .SetConditionForm(
+                            conditionDistantHandHeartSeekingShotTrigger,
+                            ConditionForm.ConditionOperation.Remove)
+                        .Build(),
+                    EffectFormBuilder
+                        .Create()
+                        .SetConditionForm(conditionDistantHandHeartSeekingShot, ConditionForm.ConditionOperation.Remove)
+                        .Build())
+                .Build())
+            .AddToDB();
+
+        Global.PowersThatIgnoreInterruptions.Add(powerDistantHandTurnOffHeartSeekingShot);
+        concentrationProvider.StopPower = powerDistantHandTurnOffHeartSeekingShot;
+
+        return FeatureDefinitionFeatureSetBuilder
+            .Create("FeatureSetDistantHandHeartSeekingShot")
+            .SetGuiPresentation(Category.Feature)
+            .AddFeatureSet(powerDistantHandHeartSeekingShot, powerDistantHandTurnOffHeartSeekingShot)
             .AddToDB();
     }
 
