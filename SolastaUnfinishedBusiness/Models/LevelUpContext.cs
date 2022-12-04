@@ -300,6 +300,7 @@ internal static class LevelUpContext
                     allowedSpells.AddRange(
                         CacheAllowedSpells(featureDefinitionFeatureSet.FeatureSet));
                     break;
+
                 case FeatureDefinitionCastSpell featureDefinitionCastSpell
                     when featureDefinitionCastSpell.SpellListDefinition != null:
                     allowedSpells.AddRange(
@@ -338,8 +339,10 @@ internal static class LevelUpContext
         foreach (var spellRepertoire in hero.SpellRepertoires
                      .Where(x => x != selectedRepertoire))
         {
+            var maxSpellLevel = spellRepertoire.MaxSpellLevelOfSpellCastingLevel;
             var castingFeature = spellRepertoire.SpellCastingFeature;
             var tag = "Multiclass";
+
             if (spellRepertoire.spellCastingClass != null)
             {
                 tag = $"{ExtraClassTag}|{spellRepertoire.spellCastingClass.Name}";
@@ -356,19 +359,22 @@ internal static class LevelUpContext
             switch (castingFeature.spellKnowledge)
             {
                 case RuleDefinitions.SpellKnowledge.Selection:
-                    knownSpells.TryAddRange(spellRepertoire.AutoPreparedSpells, tag);
+                    knownSpells.TryAddRange(
+                        spellRepertoire.AutoPreparedSpells.Where(x => x.SpellLevel <= maxSpellLevel), tag);
                     knownSpells.TryAddRange(spellRepertoire.KnownCantrips, tag);
                     knownSpells.TryAddRange(spellRepertoire.KnownSpells, tag);
                     break;
                 case RuleDefinitions.SpellKnowledge.Spellbook:
-                    knownSpells.TryAddRange(spellRepertoire.AutoPreparedSpells, tag);
+                    knownSpells.TryAddRange(
+                        spellRepertoire.AutoPreparedSpells.Where(x => x.SpellLevel <= maxSpellLevel), tag);
                     knownSpells.TryAddRange(spellRepertoire.KnownCantrips, tag);
                     knownSpells.TryAddRange(spellRepertoire.KnownSpells, tag);
                     knownSpells.TryAddRange(spellRepertoire.EnumerateAvailableScribedSpells(), tag);
                     break;
                 case RuleDefinitions.SpellKnowledge.WholeList:
-                    knownSpells.TryAddRange(castingFeature.SpellListDefinition.SpellsByLevel.SelectMany(s => s.Spells),
-                        tag);
+                    knownSpells.TryAddRange(
+                        castingFeature.SpellListDefinition.SpellsByLevel.SelectMany(s => s.Spells)
+                            .Where(x => x.SpellLevel <= maxSpellLevel), tag);
                     break;
             }
         }
@@ -397,7 +403,18 @@ internal static class LevelUpContext
             : levelUpData.OtherClassesKnownSpells;
     }
 
-    internal static void EnumerateExtraSpells(Dictionary<SpellDefinition, string> extraSpells,
+    internal static int GetMaxAutoPrepSpellsLevel(
+        RulesetCharacter rulesetCharacter,
+        FeatureDefinitionAutoPreparedSpells featureDefinitionAutoPreparedSpells)
+    {
+        var spellCastingClass = featureDefinitionAutoPreparedSpells.SpellcastingClass;
+        var spellRepertoire = rulesetCharacter.SpellRepertoires
+            .Find(x => x.SpellCastingClass == spellCastingClass);
+        return spellRepertoire?.MaxSpellLevelOfSpellCastingLevel ?? 1;
+    }
+
+    internal static void EnumerateExtraSpells(
+        Dictionary<SpellDefinition, string> extraSpells,
         RulesetCharacterHero hero)
     {
         if (hero == null)
@@ -407,7 +424,11 @@ internal static class LevelUpContext
 
         foreach (var feature in hero.GetFeaturesByType<FeatureDefinitionAutoPreparedSpells>())
         {
-            foreach (var spell in feature.AutoPreparedSpellsGroups.SelectMany(x => x.SpellsList))
+            var maxLevel = GetMaxAutoPrepSpellsLevel(hero, feature);
+
+            foreach (var spell in feature.AutoPreparedSpellsGroups
+                         .SelectMany(x => x.SpellsList)
+                         .Where(x => x.SpellLevel <= maxLevel))
             {
                 extraSpells.TryAdd(spell, feature.AutoPreparedTag);
             }
@@ -425,7 +446,11 @@ internal static class LevelUpContext
 
         foreach (var feature in features)
         {
-            foreach (var spell in feature.AutoPreparedSpellsGroups.SelectMany(x => x.SpellsList))
+            var maxLevel = GetMaxAutoPrepSpellsLevel(hero, feature);
+
+            foreach (var spell in feature.AutoPreparedSpellsGroups
+                         .SelectMany(x => x.SpellsList)
+                         .Where(x => x.SpellLevel <= maxLevel))
             {
                 extraSpells.TryAdd(spell, feature.AutoPreparedTag);
             }
