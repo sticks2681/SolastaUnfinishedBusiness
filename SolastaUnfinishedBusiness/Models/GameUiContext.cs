@@ -590,8 +590,8 @@ internal static class GameUiContext
                 Enchanted_ChainShirt_Empress_war_garb.itemPresentation = EmpressGarbOriginalItemPresentation;
                 break;
 
-            case 1: // Barbarian Clothes
-                Enchanted_ChainShirt_Empress_war_garb.itemPresentation = BarbarianClothes.ItemPresentation;
+            case 1: // Barbarian Clothes - 00_MD changed to Scale Armor
+                Enchanted_ChainShirt_Empress_war_garb.itemPresentation = Enchanted_ScaleMailOfSturdiness.ItemPresentation;
                 break;
 
             case 2: // Druid Leather

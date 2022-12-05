@@ -817,6 +817,7 @@ internal static partial class DatabaseHelper
         internal static ItemDefinition Enchanted_Rapier_Doomblade { get; } = GetDefinition<ItemDefinition>("Enchanted_Rapier_Doomblade");
         internal static ItemDefinition Enchanted_Rapier_Of_Acuteness { get; } = GetDefinition<ItemDefinition>("Enchanted_Rapier_Of_Acuteness");
         internal static ItemDefinition Enchanted_ScaleMailOfIceDancing { get; } = GetDefinition<ItemDefinition>("Enchanted_ScaleMailOfIceDancing");
+        internal static ItemDefinition Enchanted_ScaleMailOfSturdiness { get; } = GetDefinition<ItemDefinition>("Enchanted_ScaleMailOfSturdiness");
         internal static ItemDefinition Enchanted_Shortbow_Medusa { get; } = GetDefinition<ItemDefinition>("Enchanted_Shortbow_Medusa");
         internal static ItemDefinition Enchanted_Shortbow_Of_Sharpshooting { get; } = GetDefinition<ItemDefinition>("Enchanted_Shortbow_Of_Sharpshooting");
         internal static ItemDefinition Enchanted_Shortsword_Lightbringer { get; } = GetDefinition<ItemDefinition>("Enchanted_Shortsword_Lightbringer");
