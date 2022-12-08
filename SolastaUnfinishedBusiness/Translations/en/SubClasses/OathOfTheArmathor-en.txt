@@ -1,0 +1,2 @@
+Subclass/&OathOfTheArmathorDescription=Paladins who follow the Oath of the Armathor are skilled in both combat and magic.
+Subclass/&OathOfTheArmathorTitle=Oath of the Armathor

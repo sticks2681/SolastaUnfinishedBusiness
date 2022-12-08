@@ -45,6 +45,7 @@ internal static class SharedSpellsContext
 
     private static Dictionary<string, CasterProgression> SubclassCasterType { get; } = new()
     {
+        { OathOfTheArmathor.Name, CasterProgression.Full },
         { MartialSpellblade.Name, CasterProgression.OneThird },
         { RoguishShadowCaster.Name, CasterProgression.OneThird },
         { MartialSpellShield.Name, CasterProgression.OneThird }

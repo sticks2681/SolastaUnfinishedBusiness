@@ -1,4 +1,4 @@
-// manually generated on 11/19/2022 07:00:00 PM
+﻿// manually generated on 11/19/2022 07:00:00 PM
 using TA.AI;
 namespace SolastaUnfinishedBusiness.Api;
 internal static partial class DatabaseHelper
@@ -252,6 +252,7 @@ internal static partial class DatabaseHelper
         internal static FeatureDefinitionAbilityCheckAffinity AbilityCheckAffinityConditionEaglesSplendor { get; } = GetDefinition<FeatureDefinitionAbilityCheckAffinity>("AbilityCheckAffinityConditionEaglesSplendor");
         internal static FeatureDefinitionAbilityCheckAffinity AbilityCheckAffinityConditionFoxsCunning { get; } = GetDefinition<FeatureDefinitionAbilityCheckAffinity>("AbilityCheckAffinityConditionFoxsCunning");
         internal static FeatureDefinitionAbilityCheckAffinity AbilityCheckAffinityConditionOwlsWisdom { get; } = GetDefinition<FeatureDefinitionAbilityCheckAffinity>("AbilityCheckAffinityConditionOwlsWisdom");
+        internal static FeatureDefinitionAbilityCheckAffinity AbilityCheckAffinityDomainInsightDivineEye { get; } = GetDefinition<FeatureDefinitionAbilityCheckAffinity>("AbilityCheckAffinityDomainInsightDivineEye");
         internal static FeatureDefinitionAbilityCheckAffinity AbilityCheckAffinityFeatLockbreaker { get; } = GetDefinition<FeatureDefinitionAbilityCheckAffinity>("AbilityCheckAffinityFeatLockbreaker");
         internal static FeatureDefinitionAbilityCheckAffinity AbilityCheckAffinityIslandHalflingAcrobatics { get; } = GetDefinition<FeatureDefinitionAbilityCheckAffinity>("AbilityCheckAffinityIslandHalflingAcrobatics");
         internal static FeatureDefinitionAbilityCheckAffinity AbilityCheckAffinityKeenSight { get; } = GetDefinition<FeatureDefinitionAbilityCheckAffinity>("AbilityCheckAffinityKeenSight");
@@ -330,6 +331,17 @@ internal static partial class DatabaseHelper
         internal static FeatureDefinitionAttributeModifier AttributeModifierPaladinHealingPoolMultiplier { get; } = GetDefinition<FeatureDefinitionAttributeModifier>("AttributeModifierPaladinHealingPoolMultiplier");
         internal static FeatureDefinitionAttributeModifier AttributeModifierSorcererSorceryPointsBase { get; } = GetDefinition<FeatureDefinitionAttributeModifier>("AttributeModifierSorcererSorceryPointsBase");
         internal static FeatureDefinitionAttributeModifier AttributeModifierSwiftBladeBladeDance { get; } = GetDefinition<FeatureDefinitionAttributeModifier>("AttributeModifierSwiftBladeBladeDance");
+    }
+    internal static class FeatureDefinitionAutoPreparedSpellss
+    {
+        internal static FeatureDefinitionAutoPreparedSpells AutoPreparedSpellsDomainBattle { get; } = GetDefinition<FeatureDefinitionAutoPreparedSpells>("AutoPreparedSpellsDomainBattle");
+        internal static FeatureDefinitionAutoPreparedSpells AutoPreparedSpellsDomainLife { get; } = GetDefinition<FeatureDefinitionAutoPreparedSpells>("AutoPreparedSpellsDomainLife");
+        internal static FeatureDefinitionAutoPreparedSpells AutoPreparedSpellsDomainSun { get; } = GetDefinition<FeatureDefinitionAutoPreparedSpells>("AutoPreparedSpellsDomainSun");
+        internal static FeatureDefinitionAutoPreparedSpells AutoPreparedSpellsOathOfDevotion { get; } = GetDefinition<FeatureDefinitionAutoPreparedSpells>("AutoPreparedSpellsOathOfDevotion");
+    }
+    internal static class FeatureDefinitionBonusCantripss
+    {
+        internal static FeatureDefinitionBonusCantrips BonusCantripsDomainSun { get; } = GetDefinition<FeatureDefinitionBonusCantrips>("BonusCantripsDomainSun");
     }
     internal static class FeatureDefinitionCampAffinitys
     {
@@ -426,6 +438,9 @@ internal static partial class DatabaseHelper
     {
         internal static FeatureDefinitionFeatureSet AdditionalDamageRangerFavoredEnemyChoice { get; } = GetDefinition<FeatureDefinitionFeatureSet>("AdditionalDamageRangerFavoredEnemyChoice");
         internal static FeatureDefinitionFeatureSet FeatureSetAbilityScoreChoice { get; } = GetDefinition<FeatureDefinitionFeatureSet>("FeatureSetAbilityScoreChoice");
+        internal static FeatureDefinitionFeatureSet FeatureSetDomainInsightDivineLore { get; } = GetDefinition<FeatureDefinitionFeatureSet>("FeatureSetDomainInsightDivineLore");
+        internal static FeatureDefinitionFeatureSet FeatureSetDomainLawCommandingPresence { get; } = GetDefinition<FeatureDefinitionFeatureSet>("FeatureSetDomainLawCommandingPresence");
+        internal static FeatureDefinitionFeatureSet FeatureSetDomainLawUnyieldingEnforcer { get; } = GetDefinition<FeatureDefinitionFeatureSet>("FeatureSetDomainLawUnyieldingEnforcer");
         internal static FeatureDefinitionFeatureSet FeatureSetDragonbornBreathWeapon { get; } = GetDefinition<FeatureDefinitionFeatureSet>("FeatureSetDragonbornBreathWeapon");
         internal static FeatureDefinitionFeatureSet FeatureSetElfFeyAncestry { get; } = GetDefinition<FeatureDefinitionFeatureSet>("FeatureSetElfFeyAncestry");
         internal static FeatureDefinitionFeatureSet FeatureSetElfHighLanguages { get; } = GetDefinition<FeatureDefinitionFeatureSet>("FeatureSetElfHighLanguages");
@@ -449,11 +464,14 @@ internal static partial class DatabaseHelper
     {
         internal static FeatureDefinitionHealingModifier HealingModifierBeaconOfHope { get; } = GetDefinition<FeatureDefinitionHealingModifier>("HealingModifierBeaconOfHope");
         internal static FeatureDefinitionHealingModifier HealingModifierChilledByTouch { get; } = GetDefinition<FeatureDefinitionHealingModifier>("HealingModifierChilledByTouch");
+        internal static FeatureDefinitionHealingModifier HealingModifierDomainLifeBlessedHealer { get; } = GetDefinition<FeatureDefinitionHealingModifier>("HealingModifierDomainLifeBlessedHealer");
+        internal static FeatureDefinitionHealingModifier HealingModifierDomainLifeDiscipleOfLife { get; } = GetDefinition<FeatureDefinitionHealingModifier>("HealingModifierDomainLifeDiscipleOfLife");
     }
     internal static class FeatureDefinitionMagicAffinitys
     {
         internal static FeatureDefinitionMagicAffinity MagicAffinityArcaneAppraiser { get; } = GetDefinition<FeatureDefinitionMagicAffinity>("MagicAffinityArcaneAppraiser");
         internal static FeatureDefinitionMagicAffinity MagicAffinityBattleMagic { get; } = GetDefinition<FeatureDefinitionMagicAffinity>("MagicAffinityBattleMagic");
+        internal static FeatureDefinitionMagicAffinity MagicAffinityDomainSunHolyRadiance { get; } = GetDefinition<FeatureDefinitionMagicAffinity>("MagicAffinityDomainSunHolyRadiance");
         internal static FeatureDefinitionMagicAffinity MagicAffinityGreenmageGreenMagicList { get; } = GetDefinition<FeatureDefinitionMagicAffinity>("MagicAffinityGreenmageGreenMagicList");
         internal static FeatureDefinitionMagicAffinity MagicAffinitySpellBladeIntoTheFray { get; } = GetDefinition<FeatureDefinitionMagicAffinity>("MagicAffinitySpellBladeIntoTheFray");
     }
@@ -510,6 +528,7 @@ internal static partial class DatabaseHelper
         internal static FeatureDefinitionPower PowerClericDivineInterventionWizard { get; } = GetDefinition<FeatureDefinitionPower>("PowerClericDivineInterventionWizard");
         internal static FeatureDefinitionPower PowerClericTurnUndead14 { get; } = GetDefinition<FeatureDefinitionPower>("PowerClericTurnUndead14");
         internal static FeatureDefinitionPower PowerDomainBattleDivineWrath { get; } = GetDefinition<FeatureDefinitionPower>("PowerDomainBattleDivineWrath");
+        internal static FeatureDefinitionPower PowerDomainBattleHeraldOfBattle { get; } = GetDefinition<FeatureDefinitionPower>("PowerDomainBattleHeraldOfBattle");
         internal static FeatureDefinitionPower PowerDomainElementalFireBurst { get; } = GetDefinition<FeatureDefinitionPower>("PowerDomainElementalFireBurst");
         internal static FeatureDefinitionPower PowerDomainElementalHeraldOfTheElementsThunder { get; } = GetDefinition<FeatureDefinitionPower>("PowerDomainElementalHeraldOfTheElementsThunder");
         internal static FeatureDefinitionPower PowerDomainElementalLightningBlade { get; } = GetDefinition<FeatureDefinitionPower>("PowerDomainElementalLightningBlade");
@@ -534,8 +553,11 @@ internal static partial class DatabaseHelper
         internal static FeatureDefinitionPower PowerFunctionGoodberryHealingOther { get; } = GetDefinition<FeatureDefinitionPower>("PowerFunctionGoodberryHealingOther");
         internal static FeatureDefinitionPower PowerFunctionPotionOfInvisibility { get; } = GetDefinition<FeatureDefinitionPower>("PowerFunctionPotionOfInvisibility");
         internal static FeatureDefinitionPower PowerInvocationRepellingBlast { get; } = GetDefinition<FeatureDefinitionPower>("PowerInvocationRepellingBlast");
+        internal static FeatureDefinitionPower PowerOathOfDevotionAuraDevotion { get; } = GetDefinition<FeatureDefinitionPower>("PowerOathOfDevotionAuraDevotion");
         internal static FeatureDefinitionPower PowerOathOfDevotionSacredWeapon { get; } = GetDefinition<FeatureDefinitionPower>("PowerOathOfDevotionSacredWeapon");
+        internal static FeatureDefinitionPower PowerOathOfDevotionTurnUnholy { get; } = GetDefinition<FeatureDefinitionPower>("PowerOathOfDevotionTurnUnholy");
         internal static FeatureDefinitionPower PowerOathOfJugementWeightOfJustice { get; } = GetDefinition<FeatureDefinitionPower>("PowerOathOfJugementWeightOfJustice");
+        internal static FeatureDefinitionPower PowerOathOfMotherlandVolcanicAura { get; } = GetDefinition<FeatureDefinitionPower>("PowerOathOfMotherlandVolcanicAura");
         internal static FeatureDefinitionPower PowerOathOfTirmarGoldenSpeech { get; } = GetDefinition<FeatureDefinitionPower>("PowerOathOfTirmarGoldenSpeech");
         internal static FeatureDefinitionPower PowerPaladinAuraOfCourage { get; } = GetDefinition<FeatureDefinitionPower>("PowerPaladinAuraOfCourage");
         internal static FeatureDefinitionPower PowerPaladinAuraOfProtection { get; } = GetDefinition<FeatureDefinitionPower>("PowerPaladinAuraOfProtection");
@@ -633,6 +655,7 @@ internal static partial class DatabaseHelper
         internal static FeatureDefinitionSubclassChoice SubclassChoiceDruidCircle { get; } = GetDefinition<FeatureDefinitionSubclassChoice>("SubclassChoiceDruidCircle");
         internal static FeatureDefinitionSubclassChoice SubclassChoiceFighterMartialArchetypes { get; } = GetDefinition<FeatureDefinitionSubclassChoice>("SubclassChoiceFighterMartialArchetypes");
         internal static FeatureDefinitionSubclassChoice SubclassChoiceMonkMonasticTraditions { get; } = GetDefinition<FeatureDefinitionSubclassChoice>("SubclassChoiceMonkMonasticTraditions");
+        internal static FeatureDefinitionSubclassChoice SubclassChoicePaladinSacredOaths { get; } = GetDefinition<FeatureDefinitionSubclassChoice>("SubclassChoicePaladinSacredOaths");
         internal static FeatureDefinitionSubclassChoice SubclassChoiceRangerArchetypes { get; } = GetDefinition<FeatureDefinitionSubclassChoice>("SubclassChoiceRangerArchetypes");
         internal static FeatureDefinitionSubclassChoice SubclassChoiceRogueRoguishArchetypes { get; } = GetDefinition<FeatureDefinitionSubclassChoice>("SubclassChoiceRogueRoguishArchetypes");
         internal static FeatureDefinitionSubclassChoice SubclassChoiceSorcerousOrigin { get; } = GetDefinition<FeatureDefinitionSubclassChoice>("SubclassChoiceSorcerousOrigin");
@@ -1252,6 +1275,7 @@ internal static partial class DatabaseHelper
         internal static SpellDefinition SeeInvisibility { get; } = GetDefinition<SpellDefinition>("SeeInvisibility");
         internal static SpellDefinition Shatter { get; } = GetDefinition<SpellDefinition>("Shatter");
         internal static SpellDefinition Shield { get; } = GetDefinition<SpellDefinition>("Shield");
+        internal static SpellDefinition ShieldOfFaith { get; } = GetDefinition<SpellDefinition>("ShieldOfFaith");
         internal static SpellDefinition Shillelagh { get; } = GetDefinition<SpellDefinition>("Shillelagh");
         internal static SpellDefinition Shine { get; } = GetDefinition<SpellDefinition>("Shine");
         internal static SpellDefinition ShockingGrasp { get; } = GetDefinition<SpellDefinition>("ShockingGrasp");
